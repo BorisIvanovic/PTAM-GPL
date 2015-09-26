@@ -4,13 +4,13 @@
 # Edit the lines below to point to any needed include and link paths
 # Or to change the compiler's optimization flags
 CC = g++
-COMPILEFLAGS = -I MY_CUSTOM_INCLUDE_PATH -D_LINUX -D_REENTRANT -Wall  -O3 -march=nocona -msse3
+COMPILEFLAGS = -I /home/bivanovi/include -D_LINUX -D_REENTRANT -Wall  -O3 -march=nocona -msse3 $(shell pkg-config --cflags glib-2.0) $(shell pkg-config --cflags gstreamer-0.10)
 # MY_CUSTOM_LINK_PATH = .
 # LINKFLAGS = -L MY_CUSTOM_LINK_PATH -lGVars3 -lcvd
-LINKFLAGS = -L /usr/local/lib -lGVars3 -lcvd -lGLU -lGL -llapack
+LINKFLAGS = -L /home/bivanovi/lib -lGVars3 -lcvd -lGLU -lGL -llapack $(shell pkg-config --libs glib-2.0) $(shell pkg-config --libs gstreamer-0.10) -lgstapp-0.10
 
 # Edit this line to change video source
-VIDEOSOURCE = VideoSource_Linux_V4L.o
+VIDEOSOURCE = VideoSource_Linux_Gstreamer_File.o
 
 OBJECTS=	main.o\
 		GLWindow2.o\
